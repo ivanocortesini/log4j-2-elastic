@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN" name="example-configuration" packages="">
+    <Appenders>
+
+        <Elastic
+            name="example-elastic-appender"
+            cluster="http://10.0.2.4:9200"
+            index="example-log-index"
+            flushTimeOut="10"
+            ignoreExceptions="true" >
+            <PatternLayout pattern="%m%n"/>
+        </Elastic>
+
+        <Elastic
+            name="example-elastic-appender-sync"
+            cluster="http://10.0.2.4:9200"
+            index="example-log-index" >
+            <PatternLayout pattern="%m%n"/>
+        </Elastic>
+
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%m%n"/>
+        </Console>
+
+    </Appenders>
+
+    <Loggers>
+        <AsyncLogger name="example-logger" level="info" includeLocation="true" additivity="false">
+            <AppenderRef ref="example-elastic-appender"/>
+        </AsyncLogger>
+        <Logger name="example-logger-sync" level="info" includeLocation="true" additivity="false">
+            <AppenderRef ref="example-elastic-appender-sync"/>
+        </Logger>
+        <Root level="info" includeLocation="true">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>
