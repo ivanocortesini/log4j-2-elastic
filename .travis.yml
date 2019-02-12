@@ -1,1 +1,12 @@
 language: java
+
+services:
+  - elasticsearch
+
+before_script:
+  - sleep 10
+
+branches:
+  only:
+  - master
+  - develop
