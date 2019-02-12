@@ -5,7 +5,7 @@
 
         <Elastic
             name="example-elastic-appender"
-            cluster="http://10.0.2.4:9200"
+            cluster="http://localhost:9200"
             index="example-log-index"
             flushTimeOut="10"
             ignoreExceptions="true" >
@@ -14,7 +14,7 @@
 
         <Elastic
             name="example-elastic-appender-sync"
-            cluster="http://10.0.2.4:9200"
+            cluster="http://localhost:9200"
             index="example-log-index" >
             <PatternLayout pattern="%m%n"/>
         </Elastic>
