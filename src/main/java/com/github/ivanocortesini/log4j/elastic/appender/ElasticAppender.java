@@ -1,9 +1,9 @@
-package tech.elasticlog.appender;
+package com.github.ivanocortesini.log4j.elastic.appender;
 
-import tech.elasticlog.client.ElasticClient;
-import tech.elasticlog.config.ElasticConfig;
-import tech.elasticlog.config.ElasticHost;
-import tech.elasticlog.utils.DocUtils;
+import com.github.ivanocortesini.log4j.elastic.client.ElasticClient;
+import com.github.ivanocortesini.log4j.elastic.config.ElasticConfig;
+import com.github.ivanocortesini.log4j.elastic.utils.DocUtils;
+import com.github.ivanocortesini.log4j.elastic.config.ElasticHost;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;

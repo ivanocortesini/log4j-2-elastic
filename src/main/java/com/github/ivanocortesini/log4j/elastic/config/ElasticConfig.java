@@ -1,4 +1,4 @@
-package tech.elasticlog.config;
+package com.github.ivanocortesini.log4j.elastic.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

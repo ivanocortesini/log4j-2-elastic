@@ -1,4 +1,4 @@
-package tech.elasticlog.utils;
+package com.github.ivanocortesini.log4j.elastic.utils;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;

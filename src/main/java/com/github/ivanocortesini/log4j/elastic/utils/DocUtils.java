@@ -1,10 +1,10 @@
-package tech.elasticlog.utils;
+package com.github.ivanocortesini.log4j.elastic.utils;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import tech.elasticlog.appender.Logged;
+import com.github.ivanocortesini.log4j.elastic.appender.Logged;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AppenderLoggingException;

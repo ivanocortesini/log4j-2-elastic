@@ -1,4 +1,4 @@
-package tech.elasticlog.appender;
+package com.github.ivanocortesini.log4j.elastic.appender;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

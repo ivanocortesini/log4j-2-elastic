@@ -1,10 +1,9 @@
-package tech.elasticlog.appender.dto;
+package com.github.ivanocortesini.log4j.elastic.appender.dto;
 
-import tech.elasticlog.appender.Logged;
+import com.github.ivanocortesini.log4j.elastic.appender.Logged;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 

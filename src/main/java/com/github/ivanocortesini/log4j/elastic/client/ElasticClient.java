@@ -1,7 +1,7 @@
-package tech.elasticlog.client;
+package com.github.ivanocortesini.log4j.elastic.client;
 
 
-import tech.elasticlog.config.ElasticConfig;
+import com.github.ivanocortesini.log4j.elastic.config.ElasticConfig;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;

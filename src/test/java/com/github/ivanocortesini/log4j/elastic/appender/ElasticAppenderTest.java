@@ -1,11 +1,11 @@
-package tech.elasticlog.appender;
+package com.github.ivanocortesini.log4j.elastic.appender;
 
+import com.github.ivanocortesini.log4j.elastic.appender.dto.DataExample;
 import org.junit.jupiter.api.*;
-import tech.elasticlog.appender.dto.DataExample;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.Assertions;
-import tech.elasticlog.utils.ElasticUtils;
+import com.github.ivanocortesini.log4j.elastic.utils.ElasticUtils;
 
 import java.io.IOException;
 import java.util.Arrays;

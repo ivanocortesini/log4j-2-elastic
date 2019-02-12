@@ -1,12 +1,12 @@
-package tech.elasticlog.client;
+package com.github.ivanocortesini.log4j.elastic.client;
 
-import tech.elasticlog.config.ElasticConfig;
-import tech.elasticlog.config.ElasticHost;
+import com.github.ivanocortesini.log4j.elastic.config.ElasticConfig;
+import com.github.ivanocortesini.log4j.elastic.config.ElasticHost;
 import org.assertj.core.api.Assertions;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.junit.jupiter.api.*;
-import tech.elasticlog.utils.ElasticUtils;
+import com.github.ivanocortesini.log4j.elastic.utils.ElasticUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
