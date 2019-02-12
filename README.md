@@ -37,7 +37,7 @@ The simplest way to use this appender in a Java application is:
 * include this Maven dependency in your pom.xml file:
 ```
 <dependency>
-    <groupId>tech.elasticlog</groupId>
+    <groupId>com.github.ivanocortesini</groupId>
     <artifactId>log4j-2-elastic</artifactId>
     <version>1.0.0</version>
 </dependency>
