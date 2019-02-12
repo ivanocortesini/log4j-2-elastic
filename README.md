@@ -1,11 +1,11 @@
 # log4j-2-elastic
 
-I've created this project to share and enhance a [Log4j2](https://logging.apache.org/log4j/2.x/) appender that log messages directly into an [Elasticsearch](https://www.elastic.co/products/elasticsearch) cluster.
+I've created this project to share and enhance a [Log4j2](https://logging.apache.org/log4j/2.x/) appender that logs messages directly into an [Elasticsearch](https://www.elastic.co/products/elasticsearch) cluster.
 This approach to log aggregation into Elasticsearch can be a good alternative to Elastic Beats in some specific scenario.
 
 ## Features
 This product includes some standard and some particular features:
-* Take profit of Log4j2 asynchronous logging with bulk store requests. Batch mode is recognized automatically. A timeout based buffer flush can be configured.
+* Take advantage of Log4j2 asynchronous logging with bulk store requests. Batch mode is recognized automatically. A timeout based buffer flush can be configured.
 * Store @Logged annotated log message parameter objects as embedded JSON fields into the log document stored in Elasticsearch.
 * Connection to multiple cluster nodes.
 * Basic authentication.
@@ -27,7 +27,7 @@ If you want to create your own local development environment you only need to im
 
 ## Running the tests
 
-For this project I've included a small set of JUnit 5 unit tests to verify working status of main use cases.
+For this project I've included a small set of JUnit 5 unit tests to verify the working status of main use cases.
 To run those tests you need to update "log4j2.xml" and "elasticsearch.properties" configuration files to connect to an up and running Elasticsearch node or cluster.
 
 ## Deployment
