@@ -1,6 +1,7 @@
 package com.github.ivanocortesini.log4j.elastic.appender;
 
 import com.github.ivanocortesini.log4j.elastic.appender.dto.DataExample;
+import org.apache.logging.log4j.ThreadContext;
 import org.junit.jupiter.api.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -69,6 +70,23 @@ class ElasticAppenderTest {
 
         List<Map<String, Object>> storedData = elasticUtils.loadIndexData("example-log-index");
         assertThat(storedData.get(0).get("message")).isEqualTo("Single message");
+    }
+
+    @Test
+    void appendSingleMDC() throws IOException, InterruptedException {
+        ThreadContext.put("proeprty_1", "value_1");
+        ThreadContext.put("proeprty_2", "value_2");
+        assertThat(ThreadContext.getContext()).hasSize(2);
+        synchronousLogger.info("Single message");
+
+        Thread.sleep(1000);
+        Assertions.assertThat(elasticUtils.indexCount("example-log-index")).isEqualTo(1);
+
+        List<Map<String, Object>> storedData = elasticUtils.loadIndexData("example-log-index");
+        assertThat(storedData.get(0).get("message")).isEqualTo("Single message");
+        assertThat(storedData.get(0).get("proeprty_1")).isEqualTo("value_1");
+        assertThat(storedData.get(0).get("proeprty_2")).isEqualTo("value_2");
+        assertThat(ThreadContext.getContext()).hasSize(0);
     }
 
     @Test

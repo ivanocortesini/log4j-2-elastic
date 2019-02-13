@@ -1,5 +1,7 @@
 # log4j-2-elastic
-Build status: [![build_status](https://travis-ci.org/ivanocortesini/log4j-2-elastic.svg?branch=master)](https://travis-ci.org/ivanocortesini/log4j-2-elastic)
+[![build_status](https://travis-ci.org/ivanocortesini/log4j-2-elastic.svg?branch=master)](https://travis-ci.org/ivanocortesini/log4j-2-elastic)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ivanocortesini/log4j-2-elastic/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.ivanocortesini/log4j-2-elastic)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ivanocortesini/log4j-2-elastic)
 
 I've created this project to share and enhance a [Log4j2](https://logging.apache.org/log4j/2.x/) appender that logs messages directly into an [Elasticsearch](https://www.elastic.co/products/elasticsearch) cluster.
 This approach to log aggregation into Elasticsearch can be a good alternative to Elastic Beats in some specific scenario.
@@ -8,6 +10,7 @@ This approach to log aggregation into Elasticsearch can be a good alternative to
 This product includes some standard and some particular features:
 * Take advantage of Log4j2 asynchronous logging with bulk store requests. Batch mode is recognized automatically. A timeout based buffer flush can be configured.
 * Store @Logged annotated log message parameter objects as embedded JSON fields into the log document stored in Elasticsearch.
+* Mapped Diagnostic Context (MDC) support.
 * Connection to multiple cluster nodes.
 * Basic authentication.
 * Log4j "ignoreExceptions" option support.
@@ -23,7 +26,7 @@ If you want to create your own local development environment you only need to im
 * git
 * Java 8+ JDK
 * Maven 3+
-* Elasticsearch 6.6+
+* Elasticsearch 6.x
 * Your preferred IDE 
 
 ## Running the tests
@@ -56,6 +59,7 @@ The simplest way to use this appender in a Java application is:
     <PatternLayout pattern="%m%n"/>
 </Elastic>
 ```
+All needed dependencies are included (to Elasticsearch client, Log4J2 and Jackson). If you have to use another version of those dependencies (e.g. another Elasticsearch version) you can simply include an "exclusions" element for this artifact dependency declaration. 
 
 ### Configuration
 In the table below are summarized available attribute parameters (all optional except "name"):
@@ -104,7 +108,8 @@ For performance purposes I really recommend to use this appender with asynchrono
     </Loggers>
 </Configuration>
 ```
-### @Logged
+
+### @Logged & MDC
 @Logged annotation gives the possibility to add multiple objects data into a log message in the form of embedded fields inside the document stored in Elasticsearch. Below there's an example POJO (I've used [Lombok](https://github.com/rzwitserloot/lombok) here) annotated with @Logged.
 
 ```
@@ -122,7 +127,17 @@ public class DataExample {
 This annotation requires to specify the name of the destination field for wich you should **avoid to use reserved field names**:
 message, level, logger, timestamp, thread, class, method, line, errorMessage, errorType, stack.
 
-Actually dates are serialized in standard Elasticsearch [date_time](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html) format but you must include a document schema to save and manage them as real dates into Elasticsearch storage. 
+Actually dates are serialized in standard Elasticsearch [date_time](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html) format but you must include a document schema to save and manage them as real dates into Elasticsearch storage.
+
+MDC is another Log4J standard way to dynamically add fields to the log message and this appender support this feature. Fields value must be of Sring type in this case:
+```
+...
+ThreadContext.put("property_1", "String value");
+ThreadContext.put("property_2", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+logger.info("Messegae with 2 additional properties...");
+...
+```
+Destination log message document will contain 2 additional fields: 'property_1' and 'property_2'. MDC properties will be cleared automatically after log message process.
  
 ### Usage details and considerations
 When you produce a log message a correspondent JSON document will be generated and stored into Elasticsearch. So the code below (Log4j2 support [lambda expressions](https://logging.apache.org/log4j/2.x/manual/api.html)):

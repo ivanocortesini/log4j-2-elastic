@@ -4,7 +4,11 @@
 
     <groupId>com.github.ivanocortesini</groupId>
     <artifactId>log4j-2-elastic</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
+
+    <name>log4j-2-elastic</name>
+    <description>Log4J2 Elasticsearch appender</description>
+    <url>https://github.com/ivanocortesini/log4j-2-elastic</url>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -135,6 +139,14 @@
             </activation>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.22.1</version>
+                        <configuration>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                    </plugin>
                     <!-- To release to Maven central -->
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>

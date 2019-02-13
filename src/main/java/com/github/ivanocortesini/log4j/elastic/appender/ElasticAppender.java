@@ -5,6 +5,7 @@ import com.github.ivanocortesini.log4j.elastic.config.ElasticConfig;
 import com.github.ivanocortesini.log4j.elastic.utils.DocUtils;
 import com.github.ivanocortesini.log4j.elastic.config.ElasticHost;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
@@ -20,6 +21,8 @@ import org.apache.logging.log4j.status.StatusLogger;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -90,8 +93,9 @@ public final class ElasticAppender extends AbstractAppender {
     public void append(LogEvent logEvent) {
         try {
             elasticClient.storeXContentDocument(
-                    DocUtils.docBuilder(logEvent, logEvent.isIncludeLocation(), ignoreExceptions),
+                    DocUtils.docBuilder(logEvent, ThreadContext.getContext(), logEvent.isIncludeLocation(), ignoreExceptions),
                     logEvent.isEndOfBatch());
+            ThreadContext.clearAll();
         } catch (IOException e) {
             LOGGER.error("Error logging into Elasticsearch for logger '"+logEvent.getLoggerName()+"'",e);
             if (!ignoreExceptions)

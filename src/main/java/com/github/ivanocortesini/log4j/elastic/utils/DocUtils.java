@@ -33,10 +33,33 @@ public class DocUtils {
 	private static final ConcurrentHashMap<Class, String> fieldByEntity = new ConcurrentHashMap<>();
 
 
-	public static XContentBuilder docBuilder(LogEvent logEvent, boolean includeLocation, boolean ignoreExceptions) throws IOException {
+	public static XContentBuilder docBuilder(LogEvent logEvent, Map<String,String> mdc, boolean includeLocation, boolean ignoreExceptions) throws IOException {
 		XContentBuilder builder = XContentFactory.jsonBuilder().startObject();
-
 		Message message = logEvent.getMessage();
+
+		//@Logged parameters
+		Object[] parameters = message.getParameters();
+		if (parameters!=null)
+			Arrays.stream(parameters)
+					.filter(Objects::nonNull)
+					.map(p -> new AbstractMap.SimpleEntry<>(getFieldName(p), p))
+					.filter(e -> e.getKey()!=null)
+					.forEach(e -> {
+						try {
+							builder.rawField(e.getKey(), new ByteArrayInputStream(mapper.writeValueAsString(e.getValue()).getBytes()), XContentType.JSON);
+						} catch (Exception ex) {
+							LOGGER.error("Error logging into Elasticsearch for logger '"+logEvent.getLoggerName()+"' converting parameter '"+e.getKey()+"'",ex);
+							if (!ignoreExceptions)
+								throw new AppenderLoggingException(ex);
+						}
+					});
+
+		//MDC parameters
+		if (mdc!=null)
+			for (Map.Entry<String, String> e : mdc.entrySet())
+				builder.field(e.getKey(), e.getValue());
+
+		//Standard message fields
 		builder.field("message", message.getFormattedMessage());
 		builder.field("level", logEvent.getLevel().name());
 		builder.field("logger", logEvent.getLoggerName());
@@ -66,21 +89,6 @@ public class DocUtils {
 			}
 		}
 
-		Object[] parameters = message.getParameters();
-		if (parameters!=null)
-			Arrays.stream(parameters)
-					.filter(Objects::nonNull)
-					.map(p -> new AbstractMap.SimpleEntry<>(getFieldName(p), p))
-					.filter(e -> e.getKey()!=null)
-					.forEach(e -> {
-						try {
-							builder.rawField(e.getKey(), new ByteArrayInputStream(mapper.writeValueAsString(e.getValue()).getBytes()), XContentType.JSON);
-						} catch (Exception ex) {
-							LOGGER.error("Error logging into Elasticsearch for logger '"+logEvent.getLoggerName()+"' converting parameter '"+e.getKey()+"'",ex);
-							if (!ignoreExceptions)
-								throw new AppenderLoggingException(ex);
-						}
-					});
 
 		return builder.endObject();
 	}
