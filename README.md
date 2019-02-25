@@ -1,7 +1,7 @@
 # log4j-2-elastic
 [![build_status](https://travis-ci.org/ivanocortesini/log4j-2-elastic.svg?branch=master)](https://travis-ci.org/ivanocortesini/log4j-2-elastic)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ivanocortesini/log4j-2-elastic/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.ivanocortesini/log4j-2-elastic)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ivanocortesini/log4j-2-elastic)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](CONTRIBUTING.md)
 
 I've created this project to share and enhance a [Log4j2](https://logging.apache.org/log4j/2.x/) appender that logs messages directly into an [Elasticsearch](https://www.elastic.co/products/elasticsearch) cluster.
 This approach to log aggregation into Elasticsearch can be a good alternative to Elastic Beats in some specific scenario.

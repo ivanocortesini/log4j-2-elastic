@@ -96,7 +96,7 @@ public final class ElasticAppender extends AbstractAppender {
                     DocUtils.docBuilder(logEvent, ThreadContext.getContext(), logEvent.isIncludeLocation(), ignoreExceptions),
                     logEvent.isEndOfBatch());
             ThreadContext.clearAll();
-        } catch (IOException e) {
+        } catch (Throwable e) {
             LOGGER.error("Error logging into Elasticsearch for logger '"+logEvent.getLoggerName()+"'",e);
             if (!ignoreExceptions)
                 throw new AppenderLoggingException(e);

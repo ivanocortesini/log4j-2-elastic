@@ -5,6 +5,14 @@ email, or any other method with the owners of this repository before making a ch
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
+## Roadmap
+Here is a list of possible future enhancements but fell free ti propose something else o prioritize the present list adding enhancement issues.
+* Packaging as OSGI bundle
+* Spring Boot integration
+* JSON templating to define the structure of produced log message JSON to store in Elasticsearch.
+* Failover management to write on filesystem if something goes wrong
+* Support additional kind of authentication for Elasticsearch (like API key)
+ 
 ## Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a 

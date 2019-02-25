@@ -114,8 +114,8 @@ public final class ElasticClient {
             //Bulk
             if (bulkRequest == null) {
                 if (!bulkMode) {
-                    bulkMode=true;
-                    if (config.getFlushTimeOut()>0)
+                    bulkMode = true;
+                    if (config.getFlushTimeOut() > 0)
                         startBulkFlushTimeOutChecker();
                 }
                 bulkRequest = new BulkRequest();

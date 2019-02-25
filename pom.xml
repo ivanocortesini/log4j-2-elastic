@@ -21,7 +21,7 @@
         <lucene.version>7.6.0</lucene.version>
         <junit.version>5.4.0</junit.version>
     </properties>
-
+<!-- 2.9.8 -->
     <build>
         <plugins>
             <plugin>
