@@ -34,13 +34,11 @@ public final class ElasticAppender extends AbstractAppender {
     private ElasticClient elasticClient;
     private boolean ignoreExceptions;
 
-
     public ElasticAppender(String name, ElasticConfig elasticConfig, Filter filter, Layout<? extends Serializable> layout, boolean ignoreExceptions) throws IOException {
         super(name, filter, layout, ignoreExceptions);
         elasticClient = ElasticClient.getInstance(elasticConfig);
         this.ignoreExceptions = ignoreExceptions;
     }
-
 
     @PluginFactory
     public static ElasticAppender createAppender(@PluginAttribute("name") String name,

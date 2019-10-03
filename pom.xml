@@ -16,9 +16,8 @@
         <log4j.version>2.11.1</log4j.version>
         <disruptor.version>3.4.2</disruptor.version>
         <jackson.version>2.8.11.3</jackson.version>
-        <lombok.version>1.18.4</lombok.version>
-        <elastic.version>6.6.0</elastic.version>
-        <lucene.version>7.6.0</lucene.version>
+        <lombok.version>1.18.10</lombok.version>
+        <elastic.version>7.3.2</elastic.version>
         <junit.version>5.4.0</junit.version>
     </properties>
 <!-- 2.9.8 -->
